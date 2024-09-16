@@ -42,7 +42,8 @@ while cap.isOpened():
 
     # Apply segmentation mask on the frame
     condition = segmentation_results.segmentation_mask > 0.5
-    bg_image = cv2.GaussianBlur(frame, (55, 55), 0)  # Blurring the background for the segmentation effect
+    bg_image = np.zeros_like(frame)  # Create a plain black background instead of blur
+
     # Use np.where instead of cv2.where
     frame = np.where(condition[..., None], frame, bg_image)
 
